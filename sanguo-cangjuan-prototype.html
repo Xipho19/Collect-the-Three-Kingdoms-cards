@@ -299,7 +299,7 @@ document.getElementById('dailyDraw').onclick=()=>draw(1,true);
 document.getElementById('singleDraw').onclick=()=>draw(1);
 document.getElementById('tenDraw').onclick=()=>draw(10);
 document.getElementById('gachaSkip').onclick=()=>finishDrawReveal();
-document.getElementById('gachaContinue').onclick=()=>{const overlay=document.getElementById('gachaReveal');if(!overlay.classList.contains('done')){finishDrawReveal();return}const teaching=overlay.dataset.teaching==='1';closeDrawReveal();window.__drawBusy=false;const results=window.__drawResults||[];const milestones=window.__drawMilestones||[];toast(results.map(x=>x.dup?x.c.name+'（重复，转为 '+x.dust+' 残卷）':'新卡：'+x.c.name).join('、')+(milestones.length?'；'+milestones.join('；'):''));go(teaching?'collection':'gacha')};
+document.getElementById('gachaContinue').onclick=()=>{const overlay=document.getElementById('gachaReveal');if(!overlay.classList.contains('done')){finishDrawReveal();return}const teaching=overlay.dataset.teaching==='1';closeDrawReveal();window.__drawBusy=false;go(teaching?'collection':'gacha')};
 document.getElementById('runEvent').onclick=runEvent;
 document.getElementById('exchangeCommon').onclick=()=>exchange('common');
 document.getElementById('exchangeRare').onclick=()=>exchange('rare');
