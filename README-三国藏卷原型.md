@@ -2,6 +2,10 @@
 
 打开 `sanguo-cangjuan-prototype.html` 即可运行。它是一个单文件网页原型，卡牌美术为 CSS 占位图，后期可以替换为真实图片。
 
+## 在线试玩
+
+[打开 GitHub Pages 试玩版](https://xipho19.github.io/Collect-the-Three-Kingdoms-cards/sanguo-cangjuan-prototype.html)
+
 ## 已实现
 
 - 首页导航与资源显示
@@ -50,3 +54,4 @@ http://localhost:8765/sanguo-cangjuan-prototype.html
 - 名场面卡统一采用横板卡面展示
 
 - 已接入黄巾起义名场面图
+
