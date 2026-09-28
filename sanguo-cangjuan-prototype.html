@@ -100,6 +100,15 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
   .guide-tip{left:50%;width:min(410px,calc(100% - 20px));padding:12px 14px}
   .guide-tip p{font-size:12px;line-height:1.4}
 }
+
+/* Guide overlay fixes for portrait screens: compact top prompt, unobstructed target area. */
+@media (max-width:767px), (min-width:768px){
+  .guide-layer .guide-tip{top:12px!important;bottom:auto!important;height:auto!important;min-height:0!important;max-height:min(170px,calc(100dvh - 24px))!important;overflow:auto;display:block}
+  .guide-tip b{font-size:12px;margin-bottom:4px}.guide-tip p{margin:0;line-height:1.45;max-height:72px;overflow:auto}
+  .guide-tip .mini{margin-top:8px;min-height:34px;padding:7px 10px}
+  .guide-target{scroll-margin-top:200px;scroll-margin-bottom:120px}
+  .guide-layer{overflow:visible}
+}
 </style>
 </head>
 <body>
