@@ -120,10 +120,22 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
   .eventpicker .eventbtn b{font-size:12px;margin-bottom:3px}
   .eventpicker .eventbtn b,.eventpicker .eventbtn span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
+
+/* Portrait start screen */
+body.start-locked{overflow:hidden}
+.app.game-locked{visibility:hidden;pointer-events:none}
+#startScreen{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(circle at 50% 12%,#f6e8bf 0,#d9c090 52%,#ae805d 100%);transition:opacity .28s ease}
+#startScreen.hide{opacity:0;pointer-events:none}
+.start-panel{width:min(430px,100vw);min-height:100dvh;padding:clamp(34px,9vh,90px) 26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;background:linear-gradient(180deg,rgba(247,237,207,.96),rgba(224,191,133,.86));box-shadow:0 0 38px rgba(42,27,17,.3);border-left:2px solid rgba(73,47,31,.42);border-right:2px solid rgba(73,47,31,.42)}
+.start-ornament{width:176px;height:176px;border:3px solid #6c3b25;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#bf4936 0 36%,#8f302b 37% 57%,#d7a04b 58% 63%,#3b2920 64%);box-shadow:0 0 0 8px rgba(255,230,158,.45),0 15px 30px rgba(53,30,20,.22);color:#ffe8aa;font:900 76px/1 serif}
+.start-copy{margin-top:22px}.start-copy h1{margin:0;color:#2b2c2c;font-size:34px;letter-spacing:5px}.start-copy p{margin:10px 0 0;color:#6d5039;font-size:13px;letter-spacing:2px}.start-seal{margin-top:14px;color:#9a3b30;font-weight:900;letter-spacing:3px;font-size:12px}
+.start-actions{width:100%;display:grid;gap:10px}.start-actions .primary{width:100%;min-height:56px;font-size:20px;letter-spacing:3px}.start-foot{color:#775f4b;font-size:11px;line-height:1.6}
+@media (max-width:430px){.start-panel{border:0}.start-ornament{width:150px;height:150px;font-size:64px}.start-copy h1{font-size:30px}}
 </style>
 </head>
-<body>
-<div class="app">
+<body class="start-locked">
+<div id="startScreen" role="dialog" aria-modal="true" aria-labelledby="startTitle"><div class="start-panel"><div><div class="start-ornament">藏</div><div class="start-copy"><h1 id="startTitle">三国藏卷</h1><p>第一册 · 群雄初会</p><div class="start-seal">COLLECT · DISCOVER · REPLAY</div></div></div><div class="start-actions"><button class="primary" id="startGame">开始游戏</button><div class="start-foot">收集名将 · 补全史册 · 重走三国名场面</div></div></div></div>
+<div class="app game-locked" id="app">
 <header class="topbar"><div class="brand"><div class="seal">藏</div><div><h1>三国藏卷</h1><small>第一册 · 群雄初会</small></div></div><div class="wallet"><div class="pill">铜钱 <span id="coins">300</span></div><div class="pill">残卷 <span id="scrolls">0</span></div></div></header>
 <nav id="nav"><button class="navbtn active" data-page="home">首页</button><button class="navbtn" data-page="gacha">抽卡</button><button class="navbtn" data-page="collection">卡册</button><button class="navbtn" data-page="event">军机台</button><button class="navbtn" data-page="exchange">兑换</button></nav>
 <main>
@@ -256,6 +268,7 @@ document.addEventListener('click',e=>{const nav=e.target.closest('.navbtn');if(n
 function updateCollectionFilter(key,value){state.collectionFilters=state.collectionFilters||{faction:'all',rarity:'all',ownership:'all'};state.collectionFilters[key]=value;persist();renderCollection()}
 function exportSave(){const payload={app:'sanguo-cangjuan',formatVersion:1,exportedAt:new Date().toISOString(),state};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`sanguo-cangjuan-save-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('存档已导出')}
 function importSave(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const payload=JSON.parse(reader.result);const incoming=payload.state||payload;if(!incoming||typeof incoming!=='object'||!incoming.owned)throw new Error('invalid');localStorage.setItem('sanguo_cangjuan_save_v1',JSON.stringify({...freshState(),...incoming,version:4,initialScrollGrantVersion:incoming.initialScrollGrantVersion||0}));toast('存档导入成功，正在刷新');setTimeout(()=>location.reload(),450)}catch(e){toast('存档格式无效，未导入')}};reader.readAsText(file)}
+document.getElementById('startGame').onclick=()=>{document.getElementById('app').classList.remove('game-locked');document.body.classList.remove('start-locked');document.getElementById('startScreen').classList.add('hide');setTimeout(()=>document.getElementById('startScreen')?.remove(),320)};
 document.getElementById('dailyDraw').onclick=()=>draw(1,true);
 document.getElementById('singleDraw').onclick=()=>draw(1);
 document.getElementById('tenDraw').onclick=()=>draw(10);
