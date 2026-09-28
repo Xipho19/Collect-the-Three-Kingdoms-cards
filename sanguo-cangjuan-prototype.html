@@ -167,6 +167,7 @@ body.start-locked{overflow:hidden}
 </head>
 <body class="start-locked">
 <div id="startScreen" role="dialog" aria-modal="true" aria-labelledby="startTitle"><div class="start-panel"><div><div class="start-copy"><h1 id="startTitle">三国藏卷</h1><p>第一册 · 群雄初会</p><div class="start-seal">COLLECT · DISCOVER · REPLAY</div></div></div><div class="start-actions"><button class="primary" id="startGame">开始游戏</button><div class="start-foot">收集名将 · 补全史册 · 重走三国名场面</div></div></div></div>
+<audio id="bgm" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
 <div class="app game-locked" id="app">
 <header class="topbar"><div class="brand"><div class="seal">藏</div><div><h1>三国藏卷</h1><small>第一册 · 群雄初会</small></div></div><div class="wallet"><div class="pill">铜钱 <span id="coins">300</span></div><div class="pill">残卷 <span id="scrolls">0</span></div></div></header>
 <nav id="nav"><button class="navbtn active" data-page="home">首页</button><button class="navbtn" data-page="gacha">抽卡</button><button class="navbtn" data-page="collection">卡册</button><button class="navbtn" data-page="event">军机台</button><button class="navbtn" data-page="exchange">兑换</button></nav>
@@ -302,7 +303,7 @@ document.addEventListener('click',e=>{const reveal=e.target.closest('[data-revea
 function updateCollectionFilter(key,value){state.collectionFilters=state.collectionFilters||{faction:'all',rarity:'all',ownership:'all'};state.collectionFilters[key]=value;persist();renderCollection()}
 function exportSave(){const payload={app:'sanguo-cangjuan',formatVersion:1,exportedAt:new Date().toISOString(),state};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`sanguo-cangjuan-save-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);toast('存档已导出')}
 function importSave(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const payload=JSON.parse(reader.result);const incoming=payload.state||payload;if(!incoming||typeof incoming!=='object'||!incoming.owned)throw new Error('invalid');localStorage.setItem('sanguo_cangjuan_save_v1',JSON.stringify({...freshState(),...incoming,version:4,initialScrollGrantVersion:incoming.initialScrollGrantVersion||0}));toast('存档导入成功，正在刷新');setTimeout(()=>location.reload(),450)}catch(e){toast('存档格式无效，未导入')}};reader.readAsText(file)}
-document.getElementById('startGame').onclick=()=>{document.getElementById('app').classList.remove('game-locked');document.body.classList.remove('start-locked');document.getElementById('startScreen').classList.add('hide');setTimeout(()=>document.getElementById('startScreen')?.remove(),320)};
+document.getElementById('startGame').onclick=()=>{document.getElementById('app').classList.remove('game-locked');document.body.classList.remove('start-locked');document.getElementById('startScreen').classList.add('hide');const bgm=document.getElementById('bgm');if(bgm){bgm.volume=.45;bgm.play().catch(()=>{})}setTimeout(()=>document.getElementById('startScreen')?.remove(),320)};
 document.getElementById('dailyDraw').onclick=()=>draw(1,true);
 document.getElementById('singleDraw').onclick=()=>draw(1);
 document.getElementById('tenDraw').onclick=()=>draw(10);
