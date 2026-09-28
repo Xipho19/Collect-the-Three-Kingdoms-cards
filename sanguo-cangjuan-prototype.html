@@ -135,7 +135,7 @@ body.start-locked{overflow:hidden}
 /* Stronger holo-card treatment. */
 .card.rarity-holo{border-color:#b47be8;box-shadow:0 8px 24px rgba(115,62,170,.36),0 0 16px rgba(93,203,255,.24),0 0 0 1px rgba(255,224,125,.72) inset}
 .card.rarity-holo .cardart,.detail .cardart.rarity-holo{filter:saturate(1.2);box-shadow:0 0 28px rgba(123,87,211,.48),0 0 12px rgba(255,214,103,.3)}
-.cardart .holo-layer{opacity:1;transform-origin:center;background:radial-gradient(circle at center,rgba(255,255,255,.82) 0%,rgba(255,244,174,.5) 8%,rgba(255,196,80,.2) 20%,transparent 48%),repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,71,111,.4) 0deg 8deg,rgba(255,220,76,.42) 8deg 16deg,rgba(69,222,255,.38) 16deg 24deg,rgba(181,86,255,.4) 24deg 32deg,transparent 32deg 42deg);background-size:100% 100%,100% 100%;background-position:center,center;animation:holoRadiate 5.6s ease-in-out infinite}
+.cardart .holo-layer{opacity:1;background:linear-gradient(116deg,transparent 4%,rgba(255,49,106,.38) 18%,rgba(255,239,111,.5) 32%,rgba(65,224,255,.44) 48%,rgba(184,77,255,.5) 64%,rgba(255,143,65,.34) 78%,transparent 94%);background-size:180% 100%;animation:holoSweep 2.45s ease-in-out infinite}
 .cardart .holo-layer:after{opacity:.52;background-size:12px 12px;animation:holoSparkle 3.2s linear infinite}
 .holo-badge{box-shadow:0 0 10px rgba(255,228,129,.72),0 2px 12px rgba(25,17,55,.6);filter:saturate(1.25)}
 @media (max-width:767px), (min-width:768px){.cardart .holo-layer{opacity:.92}.cardart .holo-layer:after{opacity:.38}}
@@ -148,7 +148,6 @@ body.start-locked{overflow:hidden}
 .cardart .holo-layer:after{display:none!important}
 .selectcard.rarity-rare{border-color:#4b98ab;background:linear-gradient(145deg,#fff8e3,#d9eef0)}.selectcard.rarity-rare .thumb{box-shadow:0 0 12px rgba(54,169,190,.36)}
 .light-badge{background:linear-gradient(90deg,#2e7890,#d2a63f);background-size:180% 100%;animation:holoBadge 3s linear infinite}
-@keyframes holoRadiate{0%,100%{background-size:76% 76%,76% 76%;opacity:.64;filter:saturate(1.05);transform:rotate(0deg)}50%{background-size:142% 142%,142% 142%;opacity:1;filter:saturate(1.4);transform:rotate(180deg)}}
 @keyframes lightSweep{0%,18%{background-position:-90% 0}55%,72%{background-position:100% 0}100%{background-position:100% 0}}
 @keyframes lightParticles{0%{background-position:-32px 0,-46px 13px;transform:translateX(0)}50%{background-position:42px 0,28px 13px;transform:translateX(1%)}100%{background-position:116px 0,102px 13px;transform:translateX(2%)}}
 @media(prefers-reduced-motion:reduce){.cardart .shimmer-layer,.cardart .particle-layer,.light-badge{animation:none}}
