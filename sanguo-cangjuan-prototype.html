@@ -316,7 +316,7 @@ async function saveCardImage(c){
  try{
   const scene=c.rarity==='scene';
   const w=scene?1200:900;
-  const h=scene?1100:1320;
+  const h=scene?1250:1450;
   const margin=scene?60:54;
   const artX=margin,artY=margin,artW=w-margin*2,artH=scene?750:900;
   const infoY=artY+artH+34;
@@ -331,7 +331,7 @@ async function saveCardImage(c){
   if(c.bg){try{drawCover(ctx,await loadCardImage(c.bg),artX,artY,artW,artH)}catch(e){}}
   const art=await loadCardImage(c.art);
   if(scene){drawCover(ctx,art,artX+artW*.11,artY+artH*.08,artW*.78,artH*.84)}else{drawContain(ctx,art,artX+artW*.10,artY+artH*.08,artW*.80,artH*.84)}
-  try{const frame=await loadCardImage(scene?'assets/cards/scene-frame.webp':'assets/cards/character-frame.png');if(scene){const frameCanvas=document.createElement('canvas');frameCanvas.width=Math.ceil(artW);frameCanvas.height=Math.ceil(artH);const frameCtx=frameCanvas.getContext('2d');frameCtx.drawImage(frame,0,0,artW,artH);frameCtx.globalCompositeOperation='destination-out';frameCtx.fillRect(artW*.13,artH*.11,artW*.74,artH*.78);ctx.drawImage(frameCanvas,artX,artY)}else{const fw=artW*1.24,fh=artH*1.24;ctx.drawImage(frame,artX+(artW-fw)/2,artY+(artH-fh)/2,fw,fh)}}catch(e){}
+  try{const frame=await loadCardImage(scene?'assets/cards/scene-frame.webp':'assets/cards/character-frame.png');if(scene){ctx.drawImage(frame,artX,artY,artW,artH);drawCover(ctx,art,artX+artW*.13,artY+artH*.11,artW*.74,artH*.78)}else{const fw=artW*1.24,fh=artH*1.24;ctx.drawImage(frame,artX+(artW-fw)/2,artY+(artH-fh)/2,fw,fh)}}catch(e){}
   ctx.restore();
   ctx.strokeStyle='#33251f';ctx.lineWidth=5;roundedRectPath(ctx,artX,artY,artW,artH,14);ctx.stroke();
   ctx.fillStyle='#2f2721';ctx.textAlign='left';ctx.textBaseline='alphabetic';
@@ -340,7 +340,7 @@ async function saveCardImage(c){
   ctx.strokeStyle='rgba(125,87,48,.42)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(margin,infoY+118);ctx.lineTo(w-margin,infoY+118);ctx.stroke();
   ctx.fillStyle='#5d4b3a';ctx.font=`${scene?28:25}px "FangSong","仿宋","SimSun",serif`;
   const storyY=infoY+158;const storyEnd=wrapCanvasText(ctx,c.story||'',margin,storyY,w-margin*2,scene?42:38,scene?3:4);
-  const statsY=Math.min(h-60,storyEnd+70);
+  const statsY=Math.min(h-80,storyEnd+100);
   ctx.fillStyle='#3f3328';ctx.font=`700 ${scene?29:27}px "STKaiti","KaiTi","SimSun",serif`;ctx.fillText('武力 '+c.force+'　　谋略 '+c.strategy+'　　忠义 '+c.loyalty,margin,statsY);
   canvas.toBlob(async blob=>{if(!blob)return;const filename='三国藏卷-'+c.name+'.png';try{const file=new File([blob],filename,{type:'image/png'});if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:c.name,text:'三国藏卷卡牌',files:[file]});return}}catch(e){}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('卡片图片已保存')},'image/png');
  }catch(e){console.error(e);toast('图片生成失败，请稍后重试')}
