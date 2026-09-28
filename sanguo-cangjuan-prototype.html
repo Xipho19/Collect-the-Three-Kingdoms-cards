@@ -50,6 +50,32 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
 @keyframes holoSparkle{0%{transform:translate3d(-8%,0,0) rotate(18deg)}100%{transform:translate3d(8%,3%,0) rotate(18deg)}}
 @keyframes holoBadge{0%,100%{background-position:0 0}50%{background-position:100% 0}}
 @media(prefers-reduced-motion:reduce){.cardart .holo-layer,.holo-badge{animation:none}}
+
+/* Mobile portrait layout: designed around 375-430px wide phones. */
+@media (max-width: 767px){
+  :root{--mobile-nav-height:68px}
+  html{background:#ae805d}
+  body{min-width:320px;overflow-x:hidden;padding-top:env(safe-area-inset-top)}
+  .app{width:100%;padding:10px 10px calc(var(--mobile-nav-height) + env(safe-area-inset-bottom) + 18px)}
+  .topbar{position:relative;top:auto;z-index:10;padding:10px 12px;border-width:2px;border-radius:14px;gap:8px}
+  .brand{gap:8px;min-width:0}.seal{width:36px;height:36px;font-size:14px;border-width:2px}.brand h1{font-size:16px;letter-spacing:1px;white-space:nowrap}.brand small{display:block;font-size:10px;white-space:nowrap}
+  .wallet{gap:5px;flex-wrap:nowrap}.pill{padding:6px 8px;font-size:11px;white-space:nowrap;border-width:1px}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:0;padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:rgba(35,28,24,.96);border-top:2px solid #d29b3e;box-shadow:0 -8px 24px rgba(32,20,13,.24)}
+  .navbtn{min-width:0;min-height:48px;padding:7px 2px;border:1px solid rgba(255,224,153,.42);border-radius:9px;background:transparent;color:#f8e8bc;font-size:11px;line-height:1.2}.navbtn.active{background:#d29b3e;border-color:#f4d788;color:#2e1c14}
+  .hero{padding:20px 16px;border-radius:16px}.hero h2{font-size:28px}.hero p{font-size:13px;line-height:1.6}.cta{gap:8px}.cta button{flex:1;min-width:130px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0}.stat{padding:10px;border-width:1px}.stat strong{font-size:20px}
+  .sectionbar{margin:16px 0 9px}.sectionbar h3{font-size:18px}.muted{font-size:12px}
+  .cardgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.card{padding:6px;border-width:2px;border-radius:12px}.cardart{height:clamp(190px,52vw,245px);border-radius:8px}.card h4{font-size:14px;margin:7px 2px 2px}.cardmeta{font-size:11px}.cardfoot{gap:4px;margin-top:7px}.tag{max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}.mini{min-height:36px;padding:7px 9px;font-size:11px}.scene-card{grid-column:span 2!important}.scene-card .cardart{height:clamp(135px,32vw,175px)}
+  .notice{font-size:12px;padding:10px;line-height:1.5}.collection-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0}.collection-filters select,.collection-filters button{width:100%;min-height:42px;font-size:12px;padding:7px 8px}.collection-filters button{grid-column:span 2}
+  .drawbox,.event-layout,.exchange{grid-template-columns:1fr;gap:10px}.drawbox{display:flex;flex-direction:column}.pack{min-height:260px;border-width:3px}.pack .bigseal{width:100px;height:100px;font-size:46px}.pack h3{font-size:21px}.drawcontrols{padding:15px}.drawcontrols .cta{display:grid;grid-template-columns:1fr 1fr}.drawcontrols .cta #dailyDraw{grid-column:span 2}.drawcontrols .cta button{width:100%;min-height:48px}
+  .selectgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;max-height:none}.selectcard{min-height:148px;padding:6px}.selectcard .thumb{height:92px}.selectcard h5{font-size:12px;margin:4px 0 2px}.selectcard small,.role-hint{font-size:10px}.slots{gap:6px;margin:11px 0}.slot{min-height:105px;padding:5px;font-size:11px}.slot .sloticon{font-size:28px}.event-goal{font-size:12px;padding:9px 10px}.event-preview{font-size:12px;padding:10px}.event-layout>.panel:first-child{display:flex;flex-direction:column}.event-layout #runEvent{order:4;min-height:50px;width:100%;margin-top:5px}.event-layout .event-preview{order:5}.event-layout .result{order:6}
+  .exchangeitem{min-height:76px;padding:10px 0}.exchangeitem button{min-height:44px}.exchangeitem .cta{justify-content:flex-end}.exchange> .panel:last-child{padding:15px}
+  .modal{padding:0;align-items:end}.modalbox{width:100%;max-width:none;max-height:92dvh;padding:14px 12px calc(14px + env(safe-area-inset-bottom));border-radius:20px 20px 0 0;border-width:2px}.close{width:40px;height:40px;right:10px;top:9px}.detail{grid-template-columns:1fr;gap:12px}.detail .cardart{height:min(500px,64dvh);min-height:320px;width:min(100%,390px);margin:0 auto}.detail.scene-detail{grid-template-columns:1fr}.detail.scene-detail .cardart{height:min(290px,42dvh);min-height:210px;width:100%}.detail h2{font-size:24px}.detail p{font-size:13px;line-height:1.6}
+  .result{min-height:125px}.primary,.secondary{min-height:46px;padding:11px 14px}.guide-tip{bottom:calc(var(--mobile-nav-height) + env(safe-area-inset-bottom) + 10px);width:calc(100% - 20px)}
+}
+@media (max-width:374px){
+  .brand small{display:none}.wallet .pill{padding-inline:6px}.cardart{height:190px}.scene-card .cardart{height:130px}.detail .cardart{height:min(430px,60dvh);min-height:290px}.navbtn{font-size:10px}
+}
 </style>
 </head>
 <body>
