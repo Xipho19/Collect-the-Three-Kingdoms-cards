@@ -52,7 +52,7 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
 @media(prefers-reduced-motion:reduce){.cardart .holo-layer,.holo-badge{animation:none}}
 
 /* Mobile portrait layout: designed around 375-430px wide phones. */
-@media (max-width: 767px){
+@media (max-width: 767px), (min-width: 768px){
   :root{--mobile-nav-height:68px}
   html{background:#ae805d}
   body{min-width:320px;overflow-x:hidden;padding-top:env(safe-area-inset-top)}
@@ -75,6 +75,16 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
 }
 @media (max-width:374px){
   .brand small{display:none}.wallet .pill{padding-inline:6px}.cardart{height:190px}.scene-card .cardart{height:130px}.detail .cardart{height:min(430px,60dvh);min-height:290px}.navbtn{font-size:10px}
+}
+
+/* Desktop browser preview: keep the same portrait phone canvas for testing. */
+@media (min-width:768px){
+  html,body{min-height:100dvh}
+  body{display:flex;justify-content:center;align-items:stretch;background:radial-gradient(circle at 50% -20%,#f6e8bf 0,#d9c090 50%,#ae805d 100%)}
+  .app{width:430px;max-width:430px;min-height:100dvh;margin:0;padding:10px 10px calc(var(--mobile-nav-height) + env(safe-area-inset-bottom) + 18px);background:radial-gradient(circle at 50% -20%,#f6e8bf 0,#d9c090 50%,#ae805d 100%);box-shadow:0 0 38px rgba(42,27,17,.3)}
+  nav{left:50%;right:auto;width:430px;transform:translateX(-50%)}
+  .modalbox{width:430px;max-width:430px}
+  .guide-tip{width:410px;max-width:calc(100% - 20px)}
 }
 </style>
 </head>
