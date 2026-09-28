@@ -131,6 +131,14 @@ body.start-locked{overflow:hidden}
 .start-copy{margin-top:clamp(80px,18vh,180px)}.start-copy h1{margin:0;color:#2b2c2c;font-size:34px;letter-spacing:5px}.start-copy p{margin:10px 0 0;color:#6d5039;font-size:13px;letter-spacing:2px}.start-seal{margin-top:14px;color:#9a3b30;font-weight:900;letter-spacing:3px;font-size:12px}
 .start-actions{width:100%;display:grid;gap:10px}.start-actions .primary{width:100%;min-height:56px;font-size:20px;letter-spacing:3px}.start-foot{color:#775f4b;font-size:11px;line-height:1.6}
 @media (max-width:430px){.start-panel{border:0}.start-ornament{width:150px;height:150px;font-size:64px}.start-copy h1{font-size:30px}}
+
+/* Stronger holo-card treatment. */
+.card.rarity-holo{border-color:#b47be8;box-shadow:0 8px 24px rgba(115,62,170,.36),0 0 16px rgba(93,203,255,.24),0 0 0 1px rgba(255,224,125,.72) inset}
+.card.rarity-holo .cardart,.detail .cardart.rarity-holo{filter:saturate(1.2);box-shadow:0 0 28px rgba(123,87,211,.48),0 0 12px rgba(255,214,103,.3)}
+.cardart .holo-layer{opacity:1;background:linear-gradient(116deg,transparent 4%,rgba(255,49,106,.38) 18%,rgba(255,239,111,.5) 32%,rgba(65,224,255,.44) 48%,rgba(184,77,255,.5) 64%,rgba(255,143,65,.34) 78%,transparent 94%);background-size:180% 100%;animation:holoSweep 2.45s ease-in-out infinite}
+.cardart .holo-layer:after{opacity:.52;background-size:12px 12px;animation:holoSparkle 3.2s linear infinite}
+.holo-badge{box-shadow:0 0 10px rgba(255,228,129,.72),0 2px 12px rgba(25,17,55,.6);filter:saturate(1.25)}
+@media (max-width:767px), (min-width:768px){.cardart .holo-layer{opacity:.92}.cardart .holo-layer:after{opacity:.38}}
 </style>
 </head>
 <body class="start-locked">
