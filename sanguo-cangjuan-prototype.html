@@ -113,6 +113,11 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
 /* Keep the onboarding click hint fully visible around every target. */
 .guide-target:after{left:50%;right:auto;top:auto;bottom:calc(100% + 6px);transform:translateX(-50%);min-width:max-content;max-width:none;padding:5px 9px;line-height:1.2;white-space:nowrap;z-index:100}
 
+/* Keep the current target above the dim layer and cut a transparent window around it. */
+.guide-target{z-index:100!important;filter:none!important;isolation:isolate}
+.guide-target:after{z-index:101!important}
+.guide-layer .guide-backdrop{transition:clip-path .16s ease}
+
 /* Use the full portrait width for the event tabs; the third tab remains horizontally scrollable. */
 @media (max-width:767px), (min-width:768px){
   .eventpicker{width:100%;gap:6px;padding-bottom:2px;overflow:hidden}
@@ -466,11 +471,11 @@ function abandonJourney(){const j=state.journey;if(!j.active)return;settleJourne
 let guideTarget=null, guideLayout=0;
 function guideActive(){return !state.guidePaused&&state.onboardStep>0&&state.onboardStep<7}
 function persist(){try{localStorage.setItem('sanguo_cangjuan_save_v1',JSON.stringify(state))}catch(e){toast('浏览器无法保存进度，请检查存储权限')}}
-function positionGuide(){if(!guideActive()||!guideTarget?.isConnected)return;const tip=document.getElementById('guideTip'),r=guideTarget.getBoundingClientRect(),h=tip.offsetHeight,H=window.innerHeight;let top=r.bottom+18;if(top+h>H-10)top=r.top-h-18;if(top<10)top=Math.max(10,H-h-10);tip.style.setProperty('top',top+'px','important');tip.style.setProperty('bottom','auto','important')}
+function positionGuide(){if(!guideActive()||!guideTarget?.isConnected)return;const tip=document.getElementById('guideTip'),r=guideTarget.getBoundingClientRect(),h=tip.offsetHeight,H=window.innerHeight;let top=r.bottom+18;if(top+h>H-10)top=r.top-h-18;if(top<10)top=Math.max(10,H-h-10);tip.style.setProperty('top',top+'px','important');tip.style.setProperty('bottom','auto','important');const pad=8,left=Math.max(0,r.left-pad),right=Math.min(window.innerWidth,r.right+pad),topHole=Math.max(0,r.top-pad),bottom=Math.min(H,r.bottom+pad);document.querySelector('.guide-backdrop')?.style.setProperty('clip-path',`polygon(0 0,100% 0,100% 100%,0 100%,0 0,${left}px ${topHole}px,${left}px ${bottom}px,${right}px ${bottom}px,${right}px ${topHole}px,${left}px ${topHole}px)`)}
 function clearGuideTarget(){document.querySelectorAll('.guide-target').forEach(x=>x.classList.remove('guide-target'))}
 function renderGuide(){
  const layer=document.getElementById('guideLayer');clearGuideTarget();document.body.classList.toggle('guide-mode',guideActive());
- if(!guideActive()){layer.classList.remove('show');guideTarget=null;return}
+ if(!guideActive()){layer.classList.remove('show');layer.querySelector('.guide-backdrop')?.style.removeProperty('clip-path');guideTarget=null;return}
  let selector='',text='';const modal=document.getElementById('modal');
  if(state.onboardStep===1){selector='#dailyDraw';text=state.lastDaily===new Date().toISOString().slice(0,10)?'今日卡包已领取。这次使用一次性的教学卡包，免费抽取一张卡，不扣铜钱。':'请点击“领取免费卡包”。你会实际获得一张卡，抽到重复卡会自动转为残卷。'}
  if(state.onboardStep===2){if(modal.classList.contains('show')){selector='#closeModal';text='这里可以查看人物故事与武力、谋略、忠义。看完后，点击右上角关闭按钮；接着点击界面下方的“征战”。'}else if(!state.guideDetailViewed){selector='#collectionGrid .card:not(.missing) [data-detail]';text=(state.guideDrawSummary||'卡牌已入册。')+' 点击金色标记的“详情”，查看卡牌。'}else{selector='#nav [data-page="event"]';text='详情查看完成。现在请点击界面下方的“征战”按钮。'}}
@@ -482,7 +487,7 @@ function renderGuide(){
  document.getElementById('guideTitle').textContent=`新手引导 ${state.onboardStep} / 6`;
  document.getElementById('guideText').textContent=text;
  const target=document.querySelector(selector);layer.classList.toggle('show',!!target);
- if(target){target.classList.add('guide-target');const changed=guideTarget!==target;guideTarget=target;cancelAnimationFrame(guideLayout);guideLayout=requestAnimationFrame(()=>{if(changed){target.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'});target.focus({preventScroll:true})}positionGuide()})}
+ if(target){target.classList.add('guide-target');const changed=guideTarget!==target;guideTarget=target;cancelAnimationFrame(guideLayout);guideLayout=requestAnimationFrame(()=>{if(changed){target.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'});target.focus({preventScroll:true});requestAnimationFrame(positionGuide)}else positionGuide()})}
 }
 function renderOnboarding(){document.getElementById('onboarding').classList.toggle('show',state.onboardStep===0&&!state.guidePaused);document.getElementById('replayGuide').textContent=state.onboardStep>=7?'重新体验引导':'继续新手引导';renderGuide()}
 function startGuide(){if(state.onboardStep>=7||state.onboardStep===0){state.onboardStep=1;state.selected=[];state.eventId='yellow_turban';state.guideDetailViewed=false;state.guideResultPending=false;state.guideJourneySelected=false;setConquestView('classic')}state.guidePaused=false;closeModal(false);if(state.onboardStep===1&&state.guideDrawUsed&&state.lastDaily===new Date().toISOString().slice(0,10)){state.onboardStep=2;state.guideDrawSummary='今天已经体验过抽卡，可直接查看卡册；明天可再次免费抽卡。'}save();resumeGuide()}
