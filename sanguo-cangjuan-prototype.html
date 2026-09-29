@@ -332,7 +332,7 @@ function startJourney(){
 function currentJourneyNode(){return journeyRouteTemplate.find(n=>n.id===state.journey.nodeId)}
 function journeyRouteHtml(){
  const j=state.journey,labels={battle:'战斗',treasure:'宝箱',rest:'休整',elite:'精英',boss:'首领'};
- const stages=[0,1,2,3].map(stage=>{const nodes=journeyRouteTemplate.filter(n=>n.stage===stage);return `<div class="journey-map-stage ${nodes.length===1?'single':''}">${nodes.map(n=>{const done=j.route.find(x=>x.id===n.id)?.done,current=j.nodeId===n.id,available=j.choices.includes(n.id),status=done?'done':current?'current':available?'available':'locked',tag=done?'已完成':current?'当前节点':available?'点击选择':labels[n.type];const body=`<b>${done?'✓':n.icon}</b>${n.title}<small>${tag}</small>`;return available?`<button class="journey-node ${status}" data-journey-node="${n.id}">${body}</button>`:`<div class="journey-node ${status}">${body}</div>`}).join('')}</div>`}).join('<div class="journey-map-lines branch"></div>');
+ const stages=[3,2,1,0].map(stage=>{const nodes=journeyRouteTemplate.filter(n=>n.stage===stage);return `<div class="journey-map-stage ${nodes.length===1?'single':''}">${nodes.map(n=>{const done=j.route.find(x=>x.id===n.id)?.done,current=j.nodeId===n.id,available=j.choices.includes(n.id),status=done?'done':current?'current':available?'available':'locked',tag=done?'已完成':current?'当前节点':available?'点击选择':labels[n.type];const body=`<b>${done?'✓':n.icon}</b>${n.title}<small>${tag}</small>`;return available?`<button class="journey-node ${status}" data-journey-node="${n.id}">${body}</button>`:`<div class="journey-node ${status}">${body}</div>`}).join('')}</div>`}).join('<div class="journey-map-lines branch"></div>');
  return `<div class="journey-route">${stages}</div>`;
 }
 function completeJourneyNode(node){
