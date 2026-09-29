@@ -200,6 +200,13 @@ body,button,input,select,textarea{font-family:"STKaiti","KaiTi","FangSong","ä»¿å
 #nav .navbtn:focus-visible{outline:2px solid #f1c96d;outline-offset:-3px;border-radius:5px}
 @media(max-width:350px){#nav{padding-inline:3px}#nav .navbtn{font-size:10px}.nav-icon{width:23px;height:23px;flex-basis:23px}.nav-label{letter-spacing:0}}
 @media(prefers-reduced-motion:reduce){#nav .navbtn,#nav .navbtn:before,#nav .navbtn:after,.nav-icon{transition:none}}
+/* Make tutorial prompts readable on portrait screens without clipping the copy. */
+@media (max-width:767px), (min-width:768px){
+  .guide-layer .guide-tip{max-height:min(220px,calc(100dvh - 24px))!important;padding:15px 16px}
+  .guide-tip b{font-size:16px;margin-bottom:7px;letter-spacing:1px}
+  .guide-tip p{font-size:15px;line-height:1.6;max-height:118px;overflow:auto}
+  .guide-tip .mini{font-size:14px;min-height:42px;padding:8px 13px;margin-top:10px}
+}
 </style>
 </head>
 <body class="start-locked">
