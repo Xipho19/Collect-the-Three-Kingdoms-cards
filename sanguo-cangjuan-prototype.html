@@ -287,12 +287,12 @@ const collectionMilestones=[
 ];
 const journeyRoles=['前军','中军','谋士'];
 const journeyRouteTemplate=[
-{id:'jt1',stage:0,type:'battle',icon:'战',title:'黄巾前哨',desc:'黄巾军斥候封锁了官道。',next:['jt2','jt3'],reward:{coins:25,scrolls:2},enemies:[{id:'e1',name:'黄巾刀兵',force:3,strategy:1,loyalty:2},{id:'e2',name:'黄巾旗手',force:2,strategy:2,loyalty:3},{id:'e3',name:'黄巾术士',force:1,strategy:3,loyalty:2}]},
+{id:'jt1',stage:0,type:'battle',icon:'战',title:'黄巾前哨',desc:'黄巾军斥候封锁了官道。',next:['jt2','jt3'],reward:{coins:40,scrolls:4},enemies:[{id:'e1',name:'黄巾刀兵',force:3,strategy:1,loyalty:2},{id:'e2',name:'黄巾旗手',force:2,strategy:2,loyalty:3},{id:'e3',name:'黄巾术士',force:1,strategy:3,loyalty:2}]},
 {id:'jt2',stage:1,lane:0,type:'treasure',icon:'宝',title:'荒寺遗匣',desc:'绕行荒寺，风险较低，可以寻找游历道具。',next:['jt4','jt5']},
-{id:'jt3',stage:1,lane:1,type:'battle',icon:'战',title:'广宗伏兵',desc:'直取广宗，击破伏兵可获得更多铜钱与残卷。',next:['jt4','jt5'],reward:{coins:30,scrolls:3},enemies:[{id:'e4',name:'黄巾力士',force:4,strategy:1,loyalty:3},{id:'e5',name:'黄巾军侯',force:3,strategy:2,loyalty:4},{id:'e6',name:'太平道士',force:1,strategy:4,loyalty:3}]},
+{id:'jt3',stage:1,lane:1,type:'battle',icon:'战',title:'广宗伏兵',desc:'直取广宗，击破伏兵可获得更多铜钱与残卷。',next:['jt4','jt5'],reward:{coins:50,scrolls:6},enemies:[{id:'e4',name:'黄巾力士',force:4,strategy:1,loyalty:3},{id:'e5',name:'黄巾军侯',force:3,strategy:2,loyalty:4},{id:'e6',name:'太平道士',force:1,strategy:4,loyalty:3}]},
 {id:'jt4',stage:2,lane:0,type:'rest',icon:'营',title:'临时营地',desc:'稳妥休整，全体存活武将恢复生命。',next:['jt6']},
-{id:'jt5',stage:2,lane:1,type:'elite',icon:'将',title:'地公将军',desc:'挑战张宝，胜利可获得更多奖励与续命符。',next:['jt6'],reward:{coins:45,scrolls:4},enemies:[{id:'e7',name:'黄巾精锐',force:4,strategy:2,loyalty:4},{id:'e8',name:'张宝',force:3,strategy:5,loyalty:4},{id:'e9',name:'符水术士',force:2,strategy:4,loyalty:4}]},
-{id:'jt6',stage:3,type:'boss',icon:'首',title:'天公将军·张角',desc:'两条道路在祭坛前汇合，张角正在等待最后一战。',next:[],reward:{coins:100,scrolls:10},boss:{id:'boss_zhang_jiao',name:'张角',force:3,strategy:6,loyalty:4}}
+{id:'jt5',stage:2,lane:1,type:'elite',icon:'将',title:'地公将军',desc:'挑战张宝，胜利可获得更多奖励与续命符。',next:['jt6'],reward:{coins:70,scrolls:8},enemies:[{id:'e7',name:'黄巾精锐',force:4,strategy:2,loyalty:4},{id:'e8',name:'张宝',force:3,strategy:5,loyalty:4},{id:'e9',name:'符水术士',force:2,strategy:4,loyalty:4}]},
+{id:'jt6',stage:3,type:'boss',icon:'首',title:'天公将军·张角',desc:'两条道路在祭坛前汇合，张角正在等待最后一战。',next:[],reward:{coins:140,scrolls:15},boss:{id:'boss_zhang_jiao',name:'张角',force:3,strategy:6,loyalty:4}}
 ];
 function freshJourney(){return {active:false,squad:[],deploy:[],route:[],nodeIndex:0,nodeId:null,choices:[],visited:[],hp:{},maxHp:{},supplies:0,relics:[],reviveTokens:0,rewards:{coins:0,scrolls:0},battle:null,completed:0,lastResult:null}}
 let state=load();
