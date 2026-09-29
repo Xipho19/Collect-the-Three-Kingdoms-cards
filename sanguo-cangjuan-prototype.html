@@ -112,6 +112,7 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
 
 /* Keep the onboarding click hint fully visible around every target. */
 .guide-target:after{left:50%;right:auto;top:auto;bottom:calc(100% + 6px);transform:translateX(-50%);min-width:max-content;max-width:none;padding:5px 9px;line-height:1.2;white-space:nowrap;z-index:100}
+.close.guide-target:after{top:calc(100% + 6px);bottom:auto;left:50%;right:auto;transform:translateX(-50%)}
 
 /* Keep the current target above the dim layer and cut a transparent window around it. */
 .guide-target{z-index:100!important;filter:none!important;isolation:isolate}
