@@ -441,7 +441,7 @@ function resolveJourneyRound(){
  if(b.boss){const boss=firstLiving(b.enemies),target=firstLiving(b.allies);if(target){const skill=b.phase===2||b.turn%2===0,damage=applyBattleDamage(target,Math.round(boss.attack*(skill?1.25:1)));b.log.push(`${boss.name}${skill?'施放雷法':'挥杖攻击'}，对${target.name}造成 ${damage} 伤害。`)}}
  else for(const enemy of b.enemies){if(enemy.hp<=0)continue;const target=firstLiving(b.allies);if(!target)break;const skill=b.turn%2===0,damage=applyBattleDamage(target,Math.round(enemy.attack*(skill?1.15:1)));b.log.push(`${enemy.name}${skill?'发动猛攻':'攻击'}，对${target.name}造成 ${damage} 伤害。`)}
  b.allies.forEach(x=>{j.hp[x.id]=x.hp});b.skills=[];
- if(!firstLiving(b.allies)){if(j.reviveTokens>0&&!b.reviveUsed){b.defeatPending=true;b.log.push('全军倒下，可以消耗一枚续命符继续战斗。');persist();renderJourney()}else failJourney();return}
+ if(!firstLiving(b.allies)){if(!b.reviveUsed){b.defeatPending=true;if(j.reviveTokens>0){b.log.push('全军倒下，可以消耗一枚续命符继续战斗。');persist();renderJourney()}else{b.log.push('全军倒下，可以观看广告复活，或结束本次游历。');persist();renderJourney();showJourneyDefeatChoice()}}else failJourney();return}
  b.turn++;persist();renderJourney();
 }
 function winJourneyBattle(){
@@ -452,6 +452,8 @@ function winJourneyBattle(){
 function useJourneyRevive(){
  const j=state.journey,b=j.battle;if(!b||!b.defeatPending||j.reviveTokens<1)return;j.reviveTokens--;b.reviveUsed=true;b.defeatPending=false;b.allies.forEach(x=>{x.hp=Math.max(1,Math.round(x.maxHp*.5));j.hp[x.id]=x.hp});b.log.push('续命符化作金光，出阵武将恢复 50% 生命。');persist();renderJourney();
 }
+function showJourneyDefeatChoice(){const modal=document.getElementById('modal');document.getElementById('modalContent').innerHTML='<div class="journey-result"><h2>游历失败</h2><p>全军倒下了。观看一次激励广告可复活并继续战斗。</p><div class="journey-actions"><button class="primary" id="watchJourneyReviveAd">观看广告复活</button><button class="secondary" id="declineJourneyReviveAd">放弃复活并结算</button></div></div>';modal.classList.add('show');document.getElementById('watchJourneyReviveAd').onclick=reviveJourneyByAd;document.getElementById('declineJourneyReviveAd').onclick=()=>{closeModal(false);failJourney()}}
+async function reviveJourneyByAd(){const completed=await showRewardedAd('journey-revive');if(completed===false)return;const j=state.journey,b=j.battle;if(!b||!b.defeatPending)return;b.reviveUsed=true;b.defeatPending=false;b.allies.forEach(x=>{x.hp=Math.max(1,Math.round(x.maxHp*.5));j.hp[x.id]=x.hp});b.log.push('观看广告完成，金光护体，出阵武将恢复 50% 生命。');closeModal(false);persist();renderJourney();toast('广告复活成功，可以继续游历')}
 function settleJourney(title,rate,completed=false){
  const j=state.journey,coins=Math.round(j.rewards.coins*rate),scrolls=Math.round(j.rewards.scrolls*rate);state.coins+=coins;state.scrolls+=scrolls;if(completed)j.completed=(j.completed||0)+1;const squad=[...j.squad],count=j.completed||0;j.lastResult={title,coins,scrolls};Object.assign(j,freshJourney(),{squad,completed:count,lastResult:j.lastResult});persist();renderAll();toast(`${title}：获得 ${coins} 铜钱、${scrolls} 残卷`);
 }
