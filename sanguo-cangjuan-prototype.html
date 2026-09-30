@@ -127,6 +127,12 @@ button:disabled{cursor:not-allowed;opacity:.5}button:focus-visible{outline:3px s
   .eventpicker .eventbtn b,.eventpicker .eventbtn span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
 
+/* Single-pull reveal: make the featured card large enough to inspect. */
+.gacha-stage.single-reveal{min-height:390px}
+.gacha-stage.single-reveal .gacha-reveal-grid{min-height:366px}
+.gacha-stage.single-reveal .reveal-card{width:min(290px,88%);height:350px;min-height:350px}
+.gacha-stage.single-reveal .reveal-card .cardart{height:270px}
+@media(max-width:430px){.gacha-stage.single-reveal{min-height:360px}.gacha-stage.single-reveal .gacha-reveal-grid{min-height:338px}.gacha-stage.single-reveal .reveal-card{width:min(270px,88%);height:324px;min-height:324px}.gacha-stage.single-reveal .reveal-card .cardart{height:244px}}
 /* Portrait start screen */
 body.start-locked{overflow:hidden}
 .app.game-locked{visibility:hidden;pointer-events:none}
