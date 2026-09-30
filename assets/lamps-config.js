@@ -4,7 +4,7 @@
  */
 window.LAMPS_CONFIG = window.LAMPS_CONFIG || {
   gameId: "",
-  workSessionId: "b4b68aca-a48b-4fe5-bce4-83ad1c769d97",
+  workSessionId: "bbebe2c7-143b-43d1-80f8-0166740d5941",
 };
 if (window.LAMPS_CONFIG.workSessionId == null) {
   window.LAMPS_CONFIG.workSessionId = "";
