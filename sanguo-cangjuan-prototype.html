@@ -428,7 +428,7 @@ function resolveJourneyNode(){
  startJourneyBattle();
 }
 function createEnemyUnit(enemy,roleIndex){const attack=journeyAttack(enemy,roleIndex,false),maxHp=Math.round(attack*3);return {id:enemy.id,name:enemy.name,roleIndex,attack,maxHp,hp:maxHp}}
-function createBossUnit(boss){const attack=Math.round((boss.force+boss.strategy+boss.loyalty)*1.25),maxHp=Math.round(attack*5);return {id:boss.id,name:boss.name,roleIndex:1,attack,maxHp,hp:maxHp}}
+function createBossUnit(boss){const attack=Math.round((boss.force+boss.strategy+boss.loyalty)*1.25),maxHp=Math.round(attack*7);return {id:boss.id,name:boss.name,roleIndex:1,attack,maxHp,hp:maxHp}}
 function startJourneyBattle(){
  const j=state.journey,node=currentJourneyNode();if(!node)return;if(j.deploy.length!==3){toast('请选择三名存活武将');return}
  const allies=j.deploy.map((id,i)=>{const c=cards.find(x=>x.id===id);return {id,name:c.name,roleIndex:i,attack:journeyAttack(c,i),maxHp:j.maxHp[id],hp:j.hp[id]}});
