@@ -221,6 +221,7 @@ body,button,input,select,textarea{font-family:"STKaiti","KaiTi","FangSong","仿�
 .wallet .pill{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:70px;padding-left:8px}.pill:before{display:none!important}.resource-icon{display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid currentColor;border-radius:50%;font-size:11px;font-weight:900;line-height:1}.scroll-pill .resource-icon{border-radius:4px;border-style:dashed}
 /* Topbar music control. */
 .sound-toggle{position:relative;z-index:1;display:inline-grid;place-items:center;width:38px;height:38px;padding:0;border:2px solid #b1803c;border-radius:50%;background:linear-gradient(145deg,#fff8e5,#e2c184);color:#8f342c;font:900 20px/1 serif;box-shadow:inset 0 1px rgba(255,255,255,.7),0 3px 7px rgba(77,44,22,.12)}.sound-toggle.is-off{color:#8f7965;background:linear-gradient(145deg,#eadfca,#c9bda6);opacity:.78}.sound-toggle:active{transform:translateY(1px)}.sound-icon{pointer-events:none}@media(max-width:430px){.sound-toggle{width:34px;height:34px;font-size:17px}}
+.brand .seal{flex:0 0 44px;min-width:44px;min-height:44px;aspect-ratio:1}@media(max-width:760px){.brand .seal{flex-basis:36px;min-width:36px;min-height:36px}}
 </style>
 </head>
 <body class="start-locked">
@@ -413,6 +414,7 @@ function renderJourneyRoute(){
  j.deploy=j.deploy.filter(id=>alive.some(c=>c.id===id)).slice(0,3);
  const direct=node.type==='treasure'||node.type==='rest';
  root.innerHTML=`<div class="panel"><div class="journey-head"><div><h3>九州游历 · 第 ${j.visited.length+1} 站</h3><p class="muted">${node.desc}</p></div><div class="journey-stats"><span class="journey-chip">铜钱 ${j.rewards.coins}</span><span class="journey-chip">残卷 ${j.rewards.scrolls}</span><span class="journey-chip">续命符 ${j.reviveTokens}</span></div></div>${journeyRouteHtml()}<div class="journey-layout"><div><h3>${node.icon} ${node.title}</h3><p class="journey-node-summary">${node.type==='boss'?'首领战 · 张角半血后进入第二阶段':node.type==='elite'?'精英战 · 胜利后可能获得续命符':node.type==='battle'?'遭遇战 · 选择三名存活武将出阵':node.type==='rest'?'全体存活武将恢复 30% 最大生命':'打开木匣，获得一件游历道具'}</p>${j.relics.length?`<p class="muted">兵符：${j.relics.join('、')}</p>`:''}</div><div>${direct?'':`<h3>本场出阵 · ${j.deploy.length} / 3</h3><div class="journey-squad-grid">${alive.map(c=>journeyCardButton(c,j.deploy.includes(c.id),'deploy')).join('')}</div>`}</div></div><div class="journey-actions"><button class="primary" id="enterJourneyNode" ${!direct&&j.deploy.length!==3?'disabled':''}>${direct?(node.type==='rest'?'休整队伍':'开启木匣'):'进入战斗'}</button><button class="secondary" id="abandonJourney">结束游历</button></div></div>`;
+ if(node.type==='treasure'){const summary=root.querySelector('.journey-node-summary');if(summary)summary.textContent='打开木匣：30% 概率获得续命符，否则获得一件游历兵符。'}
 }
 function toggleJourneyDeploy(id){
  const j=state.journey;if(j.deploy.includes(id))j.deploy=j.deploy.filter(x=>x!==id);else if(j.deploy.length<3)j.deploy.push(id);else{toast('每场只能出阵三名武将');return}
@@ -421,8 +423,8 @@ function toggleJourneyDeploy(id){
 function resolveJourneyNode(){
  const j=state.journey,node=currentJourneyNode();if(!node)return;
  if(node.type==='treasure'){
-  if(j.reviveTokens<1){j.reviveTokens++;toast('获得续命符：战败时可复活一次')}
-  else{const pool=['青龙符','同袍令','锦囊'].filter(x=>!j.relics.includes(x)),item=pool[Math.floor(Math.random()*pool.length)];if(item){j.relics.push(item);toast(`获得${item}：对应位置攻击力 +1`)}else{j.reviveTokens++;toast('获得续命符')}}
+  if(Math.random()<.3){j.reviveTokens++;toast('获得续命符：战败时可复活一次')}
+  else{const pool=['青龙符','同袍令','锦囊'].filter(x=>!j.relics.includes(x)),item=pool[Math.floor(Math.random()*pool.length)];if(item){j.relics.push(item);toast(`获得${item}：对应位置攻击力 +1`)}else{j.rewards.scrolls+=6;toast('兵符已经集齐，获得 6 残卷')}}
   completeJourneyNode(node);persist();renderJourney();return;
  }
  if(node.type==='rest'){
