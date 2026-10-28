@@ -8,6 +8,8 @@
 
 `可玩原型` · `原生 HTML/CSS/JS` · `零构建` · `localStorage 存档`
 
+[🎮 在线试玩](https://xipho19.github.io/Collect-the-Three-Kingdoms-cards/sanguo-cangjuan-prototype.html) · [玩法说明](#玩法概览) · [本地运行](#本地运行)
+
 </div>
 
 ---
@@ -22,15 +24,11 @@
 
 ### 在线试玩
 
-仓库尚未开启 GitHub Pages。开启方式：
+GitHub Pages 已开启，无需安装，直接打开即可游玩：
 
-1. 进入仓库 **Settings → Pages**
-2. Source 选择 **Deploy from a branch**，分支选 `main`，目录选 `/ (root)`
-3. 保存后访问：
+**https://xipho19.github.io/Collect-the-Three-Kingdoms-cards/sanguo-cangjuan-prototype.html**
 
-```
-https://xipho19.github.io/Collect-the-Three-Kingdoms-cards/sanguo-cangjuan-prototype.html
-```
+> 站点根地址 <https://xipho19.github.io/Collect-the-Three-Kingdoms-cards/> 会由 GitHub Pages 的 Jekyll 将本 README 渲染为首页；游戏本体请使用上面的直达链接。
 
 ### 本地运行
 
