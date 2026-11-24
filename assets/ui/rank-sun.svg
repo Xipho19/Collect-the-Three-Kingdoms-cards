@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#fff9c9"/>
+      <stop offset="0.3" stop-color="#ffe066"/>
+      <stop offset="0.65" stop-color="#f2b21b"/>
+      <stop offset="1" stop-color="#a96206"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0.36" cy="0.28" r="0.7">
+      <stop offset="0" stop-color="#fffbe0"/>
+      <stop offset="0.45" stop-color="#ffd94e"/>
+      <stop offset="1" stop-color="#d88b08"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="0.32" cy="0.24" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g fill="#7a4300" transform="translate(0,1.5)">
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(45 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(90 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(135 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(180 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(225 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(270 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(315 24 24)"/>
+    <circle cx="24" cy="24" r="11"/>
+  </g>
+  <g fill="url(#gold)" stroke="#8a4f05" stroke-width="1.2" stroke-linejoin="round">
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(45 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(90 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(135 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(180 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(225 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(270 24 24)"/>
+    <path d="M24 1.5 L27.4 11.4 L24 14.2 L20.6 11.4 Z" transform="rotate(315 24 24)"/>
+    <circle cx="24" cy="24" r="10.5" fill="url(#core)"/>
+  </g>
+  <circle cx="21" cy="20" r="4.2" fill="url(#shine)" opacity="0.55"/>
+</svg>

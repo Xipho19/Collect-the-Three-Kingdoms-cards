@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#fff9c9"/>
+      <stop offset="0.3" stop-color="#ffe066"/>
+      <stop offset="0.64" stop-color="#f0ad18"/>
+      <stop offset="1" stop-color="#9b5a06"/>
+    </linearGradient>
+    <radialGradient id="shine" cx="0.3" cy="0.2" r="0.7">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="crescent">
+      <rect width="48" height="48" fill="#000"/>
+      <circle cx="21" cy="24" r="18" fill="#fff"/>
+      <circle cx="30" cy="24" r="14.5" fill="#000"/>
+    </mask>
+  </defs>
+  <circle cx="21" cy="24" r="19" fill="#7a4300" mask="url(#crescent)"/>
+  <circle cx="21" cy="24" r="18" fill="url(#gold)" mask="url(#crescent)"/>
+  <circle cx="21" cy="24" r="18" fill="url(#shine)" mask="url(#crescent)" opacity="0.38"/>
+  <path d="M36 7 L37.2 10 L40.5 11.2 L37.2 12.4 L36 15.5 L34.8 12.4 L31.5 11.2 L34.8 10 Z" fill="#fff6c7" opacity="0.95"/>
+</svg>
