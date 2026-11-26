@@ -223,3 +223,9 @@ npx serve .
 ## 说明
 
 仓库暂未附带开源许可证文件；如需复用代码或美术素材，请先确认素材来源与授权。
+
+## 作品集
+
+- `portfolio/三国藏卷-作品集.pdf`：当前游戏版本作品集
+- `portfolio/build_portfolio_v2.py`：作品集生成脚本
+- `portfolio/assets/v2/`：当前版本界面截图
